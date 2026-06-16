@@ -1,0 +1,14 @@
+{
+  "name": "Peggy's Bookkeeping & Tax Service",
+  "short_name": "Peggy's Tax",
+  "description": "Family-owned bookkeeping, tax preparation, and IRS resolution in Mesquite, TX since 1977 — in person or fully remote nationwide.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070A14",
+  "theme_color": "#070A14",
+  "icons": [
+    { "src": "assets/mark-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/mark-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

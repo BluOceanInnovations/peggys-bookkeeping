@@ -302,7 +302,7 @@ ul{ list-style:none; }
   backdrop-filter:blur(8px); overflow:hidden; transition:transform .35s, border-color .35s;
 }
 .card::before{
-  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none;
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
   background:var(--ribbon); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite:xor; mask-composite:exclude; opacity:0; transition:opacity .35s;
 }
@@ -320,11 +320,10 @@ ul{ list-style:none; }
 .card__list li{ position:relative; padding-left:22px; font-size:.94rem; color:var(--mist); }
 .card__list li::before{ content:""; position:absolute; left:0; top:.55em; width:8px; height:8px; border-radius:50%;
   background:var(--ribbon); }
-.card__link{ font-weight:600; font-size:.95rem; color:var(--gold); display:inline-flex; gap:6px; align-items:center; text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(242,184,92,.45); transition:gap .25s, color .25s, text-decoration-color .25s; }
+.card__link{ font-weight:600; font-size:.95rem; color:var(--mist); display:inline-flex; gap:6px; align-items:center; transition:gap .25s, color .25s; }
 .card__link span{ transition:transform .25s; }
-.card__link:hover{ color:var(--lime); text-decoration-color:var(--lime); }
+.card__link:hover{ color:var(--gold); }
 .card__link:hover span{ transform:translateX(4px); }
-.card__link:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:2px; }
 
 /* ============================================================
    REMOTE
@@ -424,7 +423,7 @@ ul{ list-style:none; }
 /* ============================================================
    REVIEWS
    ============================================================ */
-.quotes{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.quotes{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:22px; }
 .quote{ padding:30px 28px; background:var(--card); border:1px solid var(--line);
   border-radius:var(--radius-lg); backdrop-filter:blur(8px); position:relative; }
 .quote::before{ content:"\201C"; position:absolute; top:6px; left:20px; font-family:var(--f-display);
@@ -432,6 +431,7 @@ ul{ list-style:none; }
   -webkit-background-clip:text; background-clip:text; opacity:.5; }
 .quote blockquote{ position:relative; color:var(--mist); font-size:1.02rem; margin:24px 0 16px; }
 .quote figcaption{ font-family:var(--f-mono); font-size:.78rem; color:var(--mist-2); letter-spacing:.03em; }
+.quote__stars{ color:var(--gold); font-size:.95rem; letter-spacing:3px; line-height:1; margin:0 0 10px; }
 
 /* ============================================================
    RESOURCES

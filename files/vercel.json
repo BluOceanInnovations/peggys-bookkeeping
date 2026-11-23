@@ -1,0 +1,6 @@
+{
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/contact-us", "destination": "/index.html" }
+  ]
+}

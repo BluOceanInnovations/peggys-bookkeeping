@@ -340,3 +340,55 @@
     if (widget && !widget.contains(e.target)) closePanel(false);
   });
 })();
+
+/* =============================================================
+   CONTACT LINK: /contact-us
+   One-page site: /contact-us serves the home page (see vercel.json)
+   and scrolls straight to the #contact section.
+   ============================================================= */
+(function () {
+  "use strict";
+  var PATH = "/contact-us";
+  var target = document.getElementById("contact");
+  if (!target) return;
+
+  function reduceMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      document.documentElement.classList.contains("a11y-pause");
+  }
+  function scrollToContact(behavior) {
+    target.scrollIntoView({ behavior: behavior, block: "start" });
+  }
+
+  // 1) Clicking any Contact link: scroll + update the address bar (no reload).
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href="' + PATH + '"]');
+    if (!a) return;
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    scrollToContact(reduceMotion() ? "auto" : "smooth");
+    if (location.pathname !== PATH) history.pushState(null, "", PATH);
+  });
+
+  // 2) Direct visit to /contact-us: jump to the section once the page has loaded.
+  function initialJump() {
+    if (location.pathname.replace(/\/$/, "") !== PATH || location.hash) return;
+    var interacted = false;
+    var stop = function () { interacted = true; };
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (ev) {
+      window.addEventListener(ev, stop, { passive: true, once: true });
+    });
+    scrollToContact("instant");
+    // Lazy images above can shift the layout; correct once if the visitor hasn't moved.
+    setTimeout(function () { if (!interacted) scrollToContact("instant"); }, 700);
+  }
+  if (document.readyState === "complete") setTimeout(initialJump, 0);
+  else window.addEventListener("load", function () { setTimeout(initialJump, 0); });
+
+  // 3) Back / forward buttons (ignore in-page #anchor changes).
+  window.addEventListener("popstate", function () {
+    if (location.hash) return;
+    if (location.pathname === PATH) scrollToContact(reduceMotion() ? "auto" : "smooth");
+    else if (location.pathname === "/") window.scrollTo({ top: 0, behavior: reduceMotion() ? "auto" : "smooth" });
+  });
+})();
